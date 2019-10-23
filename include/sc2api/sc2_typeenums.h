@@ -456,7 +456,6 @@ namespace sc2 {
         EFFECT_VOIDRAYPRISMATICALIGNMENT = 2393,  // Target: None.
         EFFECT_WIDOWMINEATTACK = 2099,  // Target: Unit.
         EFFECT_YAMATOGUN = 401,   // Target: Unit.
-        GENERAL_MOVE = 3794,  // Target: Point.
         HALLUCINATION_ADEPT = 2391,  // Target: None.
         HALLUCINATION_ARCHON = 146,   // Target: None.
         HALLUCINATION_COLOSSUS = 148,   // Target: None.
