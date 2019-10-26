@@ -84,6 +84,7 @@ namespace sc2 {
         case UNIT_TYPEID::PROTOSS_VOIDRAY:                  return "PROTOSS_VOIDRAY"; // 5642
         case UNIT_TYPEID::PROTOSS_WARPPRISM:                return "PROTOSS_WARPPRISM"; // 1106
         case UNIT_TYPEID::PROTOSS_OBSERVER:                 return "PROTOSS_OBSERVER"; // 2297
+        case UNIT_TYPEID::PROTOSS_OBSERVERSIEGEMODE:        return "PROTOSS_OBSERVERSIEGEMODE"; // 1911
         case UNIT_TYPEID::PROTOSS_IMMORTAL:                 return "PROTOSS_IMMORTAL"; // 4163
         case UNIT_TYPEID::PROTOSS_PROBE:                    return "PROTOSS_PROBE"; // 1012678
         case UNIT_TYPEID::PROTOSS_INTERCEPTOR:              return "PROTOSS_INTERCEPTOR"; // 48082
@@ -218,6 +219,7 @@ namespace sc2 {
         case UNIT_TYPEID::PROTOSS_ASSIMILATORRICH:          return "PROTOSS_ASSIMILATORRICH";
         case UNIT_TYPEID::TERRAN_REFINERYRICH:              return "TERRAN_REFINERYRICH";
         case UNIT_TYPEID::ZERG_EXTRACTORRICH:               return "ZERG_EXTRACTORRICH";
+        case UNIT_TYPEID::NEUTRAL_DESTRUCTIBLECITYDEBRIS6X6: return "NEUTRAL_DESTRUCTIBLECITYDEBRIS6X6";
         }
 
         return "UNKNOWN";
