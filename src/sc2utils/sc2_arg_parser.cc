@@ -45,6 +45,8 @@ bool ArgParser::Parse(int argc, char* argv[]) {
             continue;
         }
 
+        std::cout << "Parsing argument " << i << " " << argv[i] << std::endl;
+
         // If help is sent print out help and return false, don't parse.
         if (strcmp(argv[i], "--help") == 0) {
             PrintHelp();

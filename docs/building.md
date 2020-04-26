@@ -39,6 +39,10 @@ $ cmake ../ -G "Visual Studio 15 2017 Win64"
 
 :: Build the project using Visual Studio.
 $ start cpp-sc2.sln
+
+:: Copy missing folders
+$ cp generated/s2clientprotocol ../include/s2clientprotocol
+$ cp ../contrib/protobuf/src/google ../include/google
 ```
 
 ## Windows (nmake)

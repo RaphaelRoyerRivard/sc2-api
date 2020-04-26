@@ -540,6 +540,8 @@ bool CoordinatorImp::WaitForAllResponses() {
         }
 
         if (total_sleep_ms >= process_settings_.timeout_ms) {
+            std::cout << "CoordinatorImp::WaitForAllResponses() timeout: " << total_sleep_ms << " >= " << process_settings_.timeout_ms << std::endl;
+            std::cerr << "CoordinatorImp::WaitForAllResponses() timeout: " << total_sleep_ms << " >= " << process_settings_.timeout_ms << std::endl;
             assert(0);
             return false;
         }

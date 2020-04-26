@@ -1797,6 +1797,11 @@ bool ControlImp::Ping() {
 }
 
 GameResponsePtr ControlImp::WaitForResponse() {
+    if (app_state_ != AppState::normal)
+    {
+        std::cout << "ControlImp::WaitForResponse() app_state_ is not normal: " << static_cast<int>(app_state_) << std::endl;
+        std::cerr << "ControlImp::WaitForResponse() app_state_ is not normal: " << static_cast<int>(app_state_) << std::endl;
+    }
     assert(app_state_ == AppState::normal);
 
     GameResponsePtr response = proto_.WaitForResponseInternal();
@@ -1815,12 +1820,23 @@ GameResponsePtr ControlImp::WaitForResponse() {
         Error(ClientError::SC2ProtocolError, errors);
         return response;
     }
+
+    if (response.get())
+    {
+        std::cout << "ControlImp::WaitForResponse() response.get() is not null and his error_size is invalid: " << response->error_size() << std::endl;
+        std::cerr << "ControlImp::WaitForResponse() response.get() is not null and his error_size is invalid: " << response->error_size() << std::endl;
+    }
     assert(!response.get());
 
     // The game application did not responded, the previous request was either not sent or the app is non-responsive.
 
     // Step 1: distinguish between a hang and a crash. Lots of time has elapsed, so if there was a crash
     // it should have finished by now.
+    if (pi_.process_id == 0)
+    {
+        std::cout << "ControlImp::WaitForResponse() pi_.process_id is 0" << std::endl;
+        std::cerr << "ControlImp::WaitForResponse() pi_.process_id is 0" << std::endl;
+    }
     assert(pi_.process_id);
     if (!IsProcessRunning(pi_.process_id)) {
         app_state_ = AppState::crashed;
