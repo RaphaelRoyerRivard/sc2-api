@@ -2,6 +2,7 @@
 #include "sc2api/sc2_unit.h"
 #include "sc2api/sc2_interfaces.h"
 #include "sc2api/sc2_control_interfaces.h"
+#include <iostream>
 
 namespace sc2 {
 
@@ -17,6 +18,7 @@ public:
     ControlInterface& control_;
 
     ActionImp(ProtoInterface& proto, ControlInterface& control);
+    ~ActionImp();
 
     SC2APIProtocol::RequestAction* GetRequestAction();
 
@@ -37,11 +39,27 @@ public:
     void SendActions() override;
 
     std::vector<Tag> commands_;
+    std::map<UNIT_TYPEID, std::map<ABILITY_ID, int>> commands_stats_;
 };
 
 ActionImp::ActionImp(ProtoInterface& proto, ControlInterface& control) :
     proto_(proto),
     control_(control) {
+}
+
+ActionImp::~ActionImp() {
+    std::cout << "Unit commands statistics:" << std::endl;
+    std::cout << "{" << std::endl;
+    for (const auto & unitTypePair : commands_stats_)
+    {
+        std::cout << "\"" << int(unitTypePair.first) << "\": [" << std::endl;
+        for (const auto & abilityPair : unitTypePair.second)
+        {
+            std::cout << "\"" << int(abilityPair.first) << "\": " << abilityPair.second << "," << std::endl;
+        }
+        std::cout << "]," << std::endl;
+    }
+    std::cout << "}";
 }
 
 SC2APIProtocol::RequestAction* ActionImp::GetRequestAction() {
@@ -147,6 +165,7 @@ void ActionImp::UnitCommand(const Units& units, AbilityID ability, bool queued_c
     for (auto unit : units) {
         if (!unit) continue;
         unit_command->add_unit_tags(unit->tag);
+        commands_stats_[unit->unit_type][ability] += 1;
     }
 }
 
@@ -165,6 +184,7 @@ void ActionImp::UnitCommand(const Units& units, AbilityID ability, const Point2D
     for (auto unit : units) {
         if (!unit) continue;
         unit_command->add_unit_tags(unit->tag);
+        commands_stats_[unit->unit_type][ability] += 1;
     }
 }
 
@@ -181,6 +201,7 @@ void ActionImp::UnitCommand(const Units& units, AbilityID ability, const Unit* t
     for (auto unit : units) {
         if (!unit) continue;
         unit_command->add_unit_tags(unit->tag);
+        commands_stats_[unit->unit_type][ability] += 1;
     }
 }
 
