@@ -1842,6 +1842,7 @@ GameResponsePtr ControlImp::WaitForResponse() {
         app_state_ = AppState::crashed;
         std::cout << "Game application has terminated unexpectedly." << std::endl;
         Error(ClientError::SC2AppFailure);
+        SleepFor(30000);
         return response;
     }
 
