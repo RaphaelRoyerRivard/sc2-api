@@ -360,6 +360,9 @@ public:
     //! For example, if you wanted to move 20 marines to some position on the map you'd want to batch all of those unit commands and
     //! send them at once.
     virtual void SendActions() = 0;
+
+
+    virtual SC2APIProtocol::RequestAction* GetRequestAction() = 0;
 };
 
 //! The ActionFeatureLayerInterface emulates UI actions in feature layer. Not available in replays.
